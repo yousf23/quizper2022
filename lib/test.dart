@@ -1,35 +1,12 @@
-void main() {
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
-
-  // questions.addAll([
-  //   {...{
-  //     'correct': {'aaaaaaaaa','ssssssss'.toString()},
-  //   }}
-  // ]);
-  Map mylist = {};
-
-  List<Map<dynamic,dynamic>> map = [];
-
-  mylist.addAll({'dd': 'se'});
-  mylist.addAll({'dd': 'sedddddd'});
-
-  map.addAll([
-    {
-      ...{
-        'correct': {mylist},
-      }
-    }
-  ]);
+void main()async{
 
 
 
+  await Hive.initFlutter();
 
-  print(map );
-
-
-
-
-
-
+  var box = await Hive.openBox('mybox');
 
 }

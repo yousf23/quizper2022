@@ -10,7 +10,7 @@ class MyDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            title: Text('heyeeee'),
+            title: Text('hey'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_) {
                 return Homepage();
