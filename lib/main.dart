@@ -302,7 +302,7 @@ class _MyAppState extends State<MyApp> {
                       return WebPage();
                     }));
                   },
-                  child: Text('move to web page')),
+                  child: Text('move too web page')),
 
 
               ElevatedButton(
