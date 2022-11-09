@@ -1,62 +1,57 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'correction.dart';
 import 'drawer.dart';
-
+import 'list.dart';
 class Result extends StatelessWidget {
   List<Map<String, Map>> mylist;
   Result(this.mylist);
   @override
   Widget build(BuildContext context) {
     print(mylist[0]['correct']);
+    var questions = Mylist().questions;
+
     // mylist.remove(mylist[0]);
     return Scaffold(
-      drawer: MyDrawer(),
-      appBar: AppBar(),
-      body: ListView.builder(
-        itemCount: mylist.length,
-        prototypeItem: ListTile(
-          title: Text('rrrrrrrrr'),
-        ),
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                return Correction(mylist);
-              }));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(1.0),
-              child: Container(
-                color: HexColor(
-                    ((mylist[index] == 'sah')) ? '#0ffc03' : '#fc0341'),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Column(
-                            children: [
-                              // Text(mylist[index]['correct'].toString()),
-                              // Text(mylist[index]['questionText'].toString()),
+        drawer: MyDrawer(),
+        appBar: AppBar(),
+        body: ListView.builder(
+            itemCount: mylist.length,
+            itemBuilder: (context, index) {
+              var ke =
+                  (questions[index]['answers'] as List<Map<String, Object>>)
+                      .map((val) {
+                return val['text'];
+              });
 
-                              Text(mylist[index]['correct']!.keys.toString()),
-                              Text(mylist[index]['correct']!.values.toString()),
+              var val =
+                  (questions[index]['answers'] as List<Map<String, Object>>)
+                      .map((val) {
+                return val['score'];
+              });
 
-                              // Text('$mylist')
-                            ],
-                          )),
-                    ),
-                    Text(mylist[index]['rank'].toString()),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
+              return Padding(
+                padding: const EdgeInsets.only(top: 1),
+                child: Container(
+                    color: HexColor(
+                        ((mylist[index]['correct']!.values.contains('no')))
+                            ? '#f52314'
+                            : ((mylist[index]['correct']!.values.isEmpty))
+                                ? '#141bf5'
+                                : '#0ead1e'),
+                    height: 100,
+                    child: Column(
+                      children: [
+                        // Text(mylist[index]['correct'].toString()),
+                        // Text(mylist[index]['questionText'].toString()),
+
+                        Text(mylist[index]['correct']!.keys.toString()),
+                        Text(mylist[index]['correct']!.values.toString()),
+                        Text(ke.toString()),
+                        Text(val.toString()),
+                      ],
+                    )),
+              );
+            }));
   }
 }
